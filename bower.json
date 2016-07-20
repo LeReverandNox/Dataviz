@@ -1,0 +1,26 @@
+{
+  "name": "Dataviz",
+  "authors": [
+    "laidet_r <rodolphe.laidet@epitech.eu>"
+  ],
+  "description": "Un projet de datavisualisation passionnant avec de l'Angular et des frameworks de papa",
+  "main": "index.html",
+  "keywords": [
+    "dataviz",
+    "angular",
+    "amcharts",
+    "highcharts",
+    "d3js",
+    "raphaelJS"
+  ],
+  "license": "PoneyLand",
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
