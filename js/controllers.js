@@ -249,6 +249,16 @@
     controllers.controller("D3JSCtrl", function (DataService) {
         var self = this;
         this.title = "D3JS";
+        this.currYear;
+        this.data = [];
+
+        DataService.getData(function (data) {
+            var formatedDatas = self.proceedData(data);
+            self.data = formatedDatas;
+            formatedDatas = self.getDatasetByYear(formatedDatas, self.currYear);
+            self.generateChart(formatedDatas);
+        });
+
         this.deleteOldGraph = function () {
             var chart = document.querySelector(".chart")
             if (chart !== null) {
