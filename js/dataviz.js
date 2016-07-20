@@ -14,9 +14,52 @@
     app.config(function ($stateProvider, $urlRouterProvider) {
         $stateProvider
             .state("home", {
-                url: "/",
-                templateUrl: "partials/home.html"
+                abstract: true,
+                url: "/home",
+                templateUrl: "partials/home.html",
+                controller: "HomeCtrl",
+                controllerAs: "HCtrl"
+            })
+            .state("home.amcharts", {
+                url: "/amcharts",
+                views: {
+                    amcharts: {
+                        templateUrl: "partials/amcharts.html",
+                        controller: "amChartsCtrl",
+                        controllerAs: "aCCtrl"
+                    }
+                }
+            })
+            .state("home.highcharts", {
+                url: "/highcharts",
+                views: {
+                    highcharts: {
+                        templateUrl: "partials/highcharts.html",
+                        controller: "highChartsCtrl",
+                        controllerAs: "hCCtrl"
+                    }
+                }
+            })
+            .state("home.d3js", {
+                url: "/d3js",
+                views: {
+                    d3js: {
+                        templateUrl: "partials/d3js.html",
+                        controller: "D3JSCtrl",
+                        controllerAs: "DCtrl"
+                    }
+                }
+            })
+            .state("home.raphaeljs", {
+                url: "/raphaeljs",
+                views: {
+                    raphaeljs: {
+                        templateUrl: "partials/raphaeljs.html",
+                        controller: "RaphaelJSCtrl",
+                        controllerAs: "RCtrl"
+                    }
+                }
             });
-        $urlRouterProvider.otherwise("/");
+        $urlRouterProvider.otherwise("/home/amcharts");
     });
 }());
