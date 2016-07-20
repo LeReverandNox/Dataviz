@@ -264,6 +264,12 @@
             return arr[0].aides;
         };
 
+        this.proceedData = function (datas) {
+            var formatedDatas = this.groupByYear(datas);
+            formatedDatas = this.groupAidesByDep(formatedDatas);
+            return formatedDatas;
+        };
+
         this.groupByYear = function (datas) {
             var formatedDatas = [];
 
