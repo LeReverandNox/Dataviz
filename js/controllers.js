@@ -74,10 +74,12 @@
         };
     });
 
-    controllers.controller("highChartsCtrl", function () {
+    controllers.controller("highChartsCtrl", function (DataService) {
+        var self = this;
         this.title = "HighCharts";
-        console.log("highchartsCtrl");
+
     });
+
     controllers.controller("D3JSCtrl", function () {
         this.title = "D3JS";
         console.log("D3JSCtrl");
