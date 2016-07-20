@@ -83,6 +83,18 @@
             self.generateChart(formatedDatas[0], formatedDatas[1]);
         });
 
+        this.proceedData = function (datas) {
+            var arrDatas = this.groupByDep(datas);
+            var formatedDatas = arrDatas[0];
+            var minYear = arrDatas[1];
+            var maxYear = arrDatas[2];
+            formatedDatas = this.groupAideByYear(formatedDatas);
+            formatedDatas = this.sortAideByYear(formatedDatas, minYear, maxYear);
+            formatedDatas = this.formatNames(formatedDatas);
+
+            return [formatedDatas, minYear];
+        };
+
         this.formatNames = function (datas) {
             datas.forEach(function (data) {
                 data.name = "" + data.departement;
