@@ -1,5 +1,5 @@
 /*jslint browser:true this*/
-/*global window console angular AmCharts $*/
+/*global window console angular AmCharts d3 $*/
 
 (function () {
     "use strict";
@@ -249,7 +249,7 @@
     controllers.controller("D3JSCtrl", function (DataService) {
         var self = this;
         this.title = "D3JS";
-        this.currYear;
+        this.currYear = 0;
         this.data = [];
 
         DataService.getData(function (data) {
@@ -260,14 +260,14 @@
         });
 
         this.deleteOldGraph = function () {
-            var chart = document.querySelector(".chart")
+            var chart = document.querySelector(".chart");
             if (chart !== null) {
                 chart.remove();
             }
-        }
+        };
 
         this.changeYear = function (year) {
-            var data = self.getDatasetByYear(self.data, self.currYear);
+            var data = self.getDatasetByYear(self.data, year);
             self.generateChart(data);
         };
 
@@ -361,13 +361,20 @@
         this.generateChart = function (data) {
             this.deleteOldGraph();
 
-            var max = d3.max(data, function(d) { return d.count; });
-            var margin = {top: 20, right: 20, bottom: 50, left: 40},
-                width = 960 - margin.left - margin.right,
-                height = 500 - margin.top - margin.bottom;
+            var max = d3.max(data, function (d) {
+                return d.count;
+            });
+            var margin = {
+                top: 20,
+                right: 20,
+                bottom: 50,
+                left: 40
+            };
+            var width = 960 - margin.left - margin.right;
+            var height = 500 - margin.top - margin.bottom;
 
             var x = d3.scale.ordinal()
-                .rangeRoundBands([0, width], .1);
+                .rangeRoundBands([0, width], 0.1);
 
             var y = d3.scale.linear()
                 .range([height, 0]);
@@ -385,43 +392,51 @@
                 .attr("class", "chart")
                 .attr("width", width + margin.left + margin.right)
                 .attr("height", height + margin.top + margin.bottom)
-              .append("g")
+                .append("g")
                 .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 
-              x.domain(data.map(function(d) { return d.dep; }));
-              y.domain([0, max]);
+            x.domain(data.map(function (d) {
+                return d.dep;
+            }));
+            y.domain([0, max]);
 
-              svg.append("g")
-                  .attr("class", "x axis")
-                  .attr("transform", "translate(0," + height + ")")
-                  .call(xAxis)
+            svg.append("g")
+                .attr("class", "x axis")
+                .attr("transform", "translate(0," + height + ")")
+                .call(xAxis)
                 .append("text")
-                  .attr("y", 35)
-                  .attr("x", width / 2)
-                  .attr("font-size", "1.5em")
-                  .style("text-anchor", "middle")
-                  .text("Départements");
+                .attr("y", 35)
+                .attr("x", width / 2)
+                .attr("font-size", "1.5em")
+                .style("text-anchor", "middle")
+                .text("Départements");
 
-              svg.append("g")
-                  .attr("class", "y axis")
-                  .call(yAxis)
+            svg.append("g")
+                .attr("class", "y axis")
+                .call(yAxis)
                 .append("text")
-                  .attr("transform", "rotate(-90)")
-                  .attr("y", -25)
-                  .attr("x", -(height / 2))
-                  .attr("font-size", "1.5em")
-                  .style("text-anchor", "middle")
-                  .text("Nombre");
+                .attr("transform", "rotate(-90)")
+                .attr("y", -25)
+                .attr("x", -(height / 2))
+                .attr("font-size", "1.5em")
+                .style("text-anchor", "middle")
+                .text("Nombre");
 
-              svg.selectAll(".bar")
-                  .data(data)
+            svg.selectAll(".bar")
+                .data(data)
                 .enter().append("rect")
-                  .attr("class", "bar")
-                  .attr("x", function(d) { return x(d.dep); })
-                  .attr("width", x.rangeBand())
-                  .attr("y", function(d) { return y(d.count); })
-                  .attr("height", function(d) { return height - y(d.count); });
+                .attr("class", "bar")
+                .attr("x", function (d) {
+                    return x(d.dep);
+                })
+                .attr("width", x.rangeBand())
+                .attr("y", function (d) {
+                    return y(d.count);
+                })
+                .attr("height", function (d) {
+                    return height - y(d.count);
+                });
         };
     });
 
