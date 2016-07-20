@@ -266,6 +266,11 @@
             }
         }
 
+        this.changeYear = function (year) {
+            var data = self.getDatasetByYear(self.data, self.currYear);
+            self.generateChart(data);
+        };
+
         this.getDatasetByYear = function (data, year) {
             var arr = data.filter(function (set) {
                 return set.year === year;
