@@ -83,6 +83,34 @@
             self.generateChart(formatedDatas[0], formatedDatas[1]);
         });
 
+        this.groupAideByYear = function (datas) {
+            datas.forEach(function (record) {
+                var aides = [];
+                record.aides.forEach(function (year) {
+                    var existing = self.isYearInArray(aides, year);
+                    if (!existing) {
+                        aides.push({
+                            year: year,
+                            count: 1
+                        });
+                    } else {
+                        existing.count += 1;
+                    }
+                });
+                record.aides = aides;
+            });
+            return datas;
+        };
+
+        this.isYearInArray = function (aides, year) {
+            var arr = aides.filter(function (aide) {
+                return aide.year === year;
+            });
+            return (arr.length === 0)
+                ? false
+                : arr[0];
+        };
+
         this.groupByDep = function (data) {
             var formatedDatas = [];
             var minYear = data[0].fields.exercice_de_la_premiere_decision;
