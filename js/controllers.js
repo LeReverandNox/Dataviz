@@ -109,8 +109,9 @@
             datas.forEach(function (data) {
                 var aides = [];
                 var i;
+                var block;
                 for (i = parseInt(minYear); i <= parseInt(maxYear); i += 1) {
-                    var block = data.aides.filter(function (aide) {
+                    block = data.aides.filter(function (aide) {
                         return parseInt(aide.year) === i;
                     });
                     if (block.length > 0) {
@@ -164,7 +165,7 @@
                     maxYear = year;
                 }
                 if (year < minYear) {
-                    minYear = year
+                    minYear = year;
                 }
                 if (dep === undefined) {
                     return;
