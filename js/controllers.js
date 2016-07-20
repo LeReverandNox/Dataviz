@@ -192,6 +192,57 @@
                 ? false
                 : arr[0];
         };
+
+        this.generateChart = function (proceededDatas, minYear) {
+            $('#highcharts').highcharts({
+                chart: {
+                    type: 'area'
+                },
+                title: {
+                    text: "Nombre d'aides par année par département"
+                },
+                xAxis: {
+                    allowDecimals: false,
+                    title: {
+                        text: "Années"
+                    },
+                    labels: {
+                        formatter: function () {
+                            return this.value; // clean, unformatted number for year
+                        }
+                    }
+                },
+                yAxis: {
+                    title: {
+                        text: "Nombre d'aides"
+                    },
+                    labels: {
+                        formatter: function () {
+                            return this.value;
+                        }
+                    }
+                },
+                tooltip: {
+                    pointFormat: '{series.name} got <b>{point.y:,.0f}</b><br/>aides in {point.x}'
+                },
+                plotOptions: {
+                    area: {
+                        pointStart: parseInt(minYear),
+                        marker: {
+                            enabled: false,
+                            symbol: 'circle',
+                            radius: 2,
+                            states: {
+                                hover: {
+                                    enabled: true
+                                }
+                            }
+                        }
+                    }
+                },
+                series: proceededDatas
+            });
+        };
     });
 
     controllers.controller("D3JSCtrl", function () {
