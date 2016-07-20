@@ -256,6 +256,14 @@
             }
         }
 
+        this.getDatasetByYear = function (data, year) {
+            var arr = data.filter(function (set) {
+                return set.year === year;
+            });
+
+            return arr[0].aides;
+        };
+
         this.groupByYear = function (datas) {
             var formatedDatas = [];
 
