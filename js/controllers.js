@@ -249,6 +249,13 @@
     controllers.controller("D3JSCtrl", function (DataService) {
         var self = this;
         this.title = "D3JS";
+        this.deleteOldGraph = function () {
+            var chart = document.querySelector(".chart")
+            if (chart !== null) {
+                chart.remove();
+            }
+        }
+
     });
 
     controllers.controller("RaphaelJSCtrl", function () {
