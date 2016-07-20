@@ -29,6 +29,7 @@
     "angular-ui-router": "^0.3.1",
     "angular-material": "master",
     "jquery": "^3.1.0",
-    "highcharts": "^4.2.5"
+    "highcharts": "^4.2.5",
+    "d3": "^4.1.1"
   }
 }
