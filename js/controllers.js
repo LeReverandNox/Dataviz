@@ -78,6 +78,11 @@
         var self = this;
         this.title = "HighCharts";
 
+        DataService.getData(function (data) {
+            var formatedDatas = self.proceedData(data);
+            self.generateChart(formatedDatas[0], formatedDatas[1]);
+        });
+
     });
 
     controllers.controller("D3JSCtrl", function () {
