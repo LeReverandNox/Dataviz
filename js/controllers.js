@@ -246,10 +246,11 @@
         };
     });
 
-    controllers.controller("D3JSCtrl", function () {
+    controllers.controller("D3JSCtrl", function (DataService) {
+        var self = this;
         this.title = "D3JS";
-        console.log("D3JSCtrl");
     });
+
     controllers.controller("RaphaelJSCtrl", function () {
         this.title = "RaphaelJS";
         console.log("RaphaelJSCtrl");
