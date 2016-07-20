@@ -1,5 +1,5 @@
 /*jslint browser:true this*/
-/*global window console angular AmCharts*/
+/*global window console angular AmCharts $*/
 
 (function () {
     "use strict";
@@ -83,6 +83,46 @@
             self.generateChart(formatedDatas[0], formatedDatas[1]);
         });
 
+        this.groupByDep = function (data) {
+            var formatedDatas = [];
+            var minYear = data[0].fields.exercice_de_la_premiere_decision;
+            var maxYear = data[0].fields.exercice_de_la_premiere_decision;
+            data.forEach(function (record) {
+                var dep = record.fields.adresse_administrative_code_departement_du_tiers_beneficiaire;
+                var year = record.fields.exercice_de_la_premiere_decision;
+
+                if (year > maxYear) {
+                    maxYear = year;
+                }
+                if (year < minYear) {
+                    minYear = year
+                }
+                if (dep === undefined) {
+                    return;
+                }
+
+                var obj = {};
+                var existing = self.isDepInArray(formatedDatas, dep);
+                if (!existing) {
+                    obj.departement = dep;
+                    obj.aides = [];
+                    obj.aides.push(year);
+                    formatedDatas.push(obj);
+                } else {
+                    existing.aides.push(year);
+                }
+            });
+            return [formatedDatas, minYear, maxYear];
+        };
+
+        this.isDepInArray = function (formatedDatas, dep) {
+            var arr = formatedDatas.filter(function (data) {
+                return data.departement === dep;
+            });
+            return (arr.length === 0)
+                ? false
+                : arr[0];
+        };
     });
 
     controllers.controller("D3JSCtrl", function () {
