@@ -1,5 +1,5 @@
 /*jslint browser:true this*/
-/*global window console angular*/
+/*global window console angular AmCharts*/
 
 (function () {
     "use strict";
@@ -13,11 +13,11 @@
     controllers.controller("amChartsCtrl", function (DataService) {
         var self = this;
         this.title = "amCharts";
+        this.element = document.querySelector("#amcharts");
 
         DataService.getData(function (data) {
-            console.log(data);
-            // var formatedDatas = self.proceedData(data);
-            // self.generateChart(formatedDatas);
+            var formatedDatas = self.proceedData(data);
+            self.generateChart(formatedDatas);
         });
 
         this.proceedData = function (data) {
@@ -46,6 +46,31 @@
             return (arr.length === 0)
                 ? false
                 : arr[0];
+        };
+        this.generateChart = function (formatedDatas) {
+            // DAT chart
+            var chart = new AmCharts.AmSerialChart();
+            chart.dataProvider = formatedDatas;
+            chart.categoryField = "departement";
+            chart.angle = 30;
+            chart.depth3D = 30;
+
+            var categoryAxis = chart.categoryAxis;
+            categoryAxis.title = "Départements";
+
+            var valueAxis = new AmCharts.ValueAxis();
+            valueAxis.title = "Nombre d'aides";
+            chart.addValueAxis(valueAxis);
+
+            var graph = new AmCharts.AmGraph();
+            graph.valueField = "count";
+            graph.type = "column";
+            graph.fillColors = "red";
+            graph.fillAlphas = 0.8;
+            chart.addGraph(graph);
+
+            // Phoenix Write !
+            chart.write(this.element);
         };
     });
 
