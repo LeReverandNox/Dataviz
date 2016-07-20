@@ -83,6 +83,25 @@
             self.generateChart(formatedDatas[0], formatedDatas[1]);
         });
 
+        this.sortAideByYear = function (datas, minYear, maxYear) {
+            datas.forEach(function (data) {
+                var aides = [];
+                var i;
+                for (i = parseInt(minYear); i <= parseInt(maxYear); i += 1) {
+                    var block = data.aides.filter(function (aide) {
+                        return parseInt(aide.year) === i;
+                    });
+                    if (block.length > 0) {
+                        aides.push(block[0].count);
+                    } else {
+                        aides.push(0);
+                    }
+                }
+                data.aides = aides;
+            });
+            return datas;
+        };
+
         this.groupAideByYear = function (datas) {
             datas.forEach(function (record) {
                 var aides = [];
