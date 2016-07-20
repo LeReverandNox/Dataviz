@@ -295,6 +295,40 @@
             }
         };
 
+        this.groupAidesByDep = function (datas) {
+            var aides;
+            datas.forEach(function (year) {
+                aides = [];
+                year.aides.forEach(function (aide) {
+                    var dep = aide.fields.adresse_administrative_code_departement_du_tiers_beneficiaire;
+
+                    var existing = self.isDepInArray(aides, dep);
+                    if (!existing) {
+                        aides.push({
+                            dep: dep,
+                            count: 1
+                        });
+                    } else {
+                        existing.count += 1;
+                    }
+                });
+                year.aides = aides;
+            });
+            return datas;
+        };
+
+        this.isDepInArray = function (aides, dep) {
+            var arr = aides.filter(function (aide) {
+                return aide.dep === dep;
+            });
+
+            if (arr.length > 0) {
+                return arr[0];
+            } else {
+                return false;
+            }
+        };
+
     });
 
     controllers.controller("RaphaelJSCtrl", function () {
