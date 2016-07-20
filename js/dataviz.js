@@ -7,7 +7,8 @@
     var app = angular.module("dataviz", [
         "ui.router",
         "dataviz-controllers",
-        "dataviz-services"
+        "dataviz-services",
+        "ngMaterial"
     ]);
 
     app.config(function ($stateProvider, $urlRouterProvider) {
