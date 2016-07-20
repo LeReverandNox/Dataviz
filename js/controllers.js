@@ -1,4 +1,4 @@
-/*jslint browser:true this*/
+/*jslint browser:true this for*/
 /*global window console angular AmCharts d3 $*/
 
 (function () {
@@ -195,9 +195,9 @@
         };
 
         this.generateChart = function (proceededDatas, minYear) {
-            $('#highcharts').highcharts({
+            $("#highcharts").highcharts({
                 chart: {
-                    type: 'area'
+                    type: "area"
                 },
                 title: {
                     text: "Nombre d'aides par année par département"
@@ -224,14 +224,14 @@
                     }
                 },
                 tooltip: {
-                    pointFormat: '{series.name} got <b>{point.y:,.0f}</b><br/>aides in {point.x}'
+                    pointFormat: "{series.name} got <b>{point.y:,.0f}</b><br/>aides in {point.x}"
                 },
                 plotOptions: {
                     area: {
                         pointStart: parseInt(minYear),
                         marker: {
                             enabled: false,
-                            symbol: 'circle',
+                            symbol: "circle",
                             radius: 2,
                             states: {
                                 hover: {
