@@ -256,6 +256,45 @@
             }
         }
 
+        this.groupByYear = function (datas) {
+            var formatedDatas = [];
+
+            this.currYear = datas[0].fields.exercice_de_la_premiere_decision;
+            datas.forEach(function (record) {
+                var year = record.fields.exercice_de_la_premiere_decision;
+                if (year === undefined) {
+                    return;
+                }
+
+                if (year < self.currYear) {
+                    self.currYear = year;
+                }
+
+                var existing = self.isYearInArray(formatedDatas, year);
+                if (!existing) {
+                    formatedDatas.push({
+                        year: year,
+                        aides: [record]
+                    });
+                } else {
+                    existing.aides.push(record);
+                }
+            });
+            return formatedDatas;
+        };
+
+        this.isYearInArray = function (datas, year) {
+            var arr = datas.filter(function (data) {
+                return data.year === year;
+            });
+
+            if (arr.length > 0) {
+                return arr[0];
+            } else {
+                return false;
+            }
+        };
+
     });
 
     controllers.controller("RaphaelJSCtrl", function () {
