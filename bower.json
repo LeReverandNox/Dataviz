@@ -30,6 +30,7 @@
     "angular-material": "master",
     "jquery": "^3.1.0",
     "highcharts": "^4.2.5",
-    "d3": "3.5.17"
+    "d3": "3.5.17",
+    "raphael": "^2.2.1"
   }
 }
