@@ -464,6 +464,10 @@
             return formatedDatas;
         };
 
+        this.generateChart = function (data, labels) {
+            Raphael("raphaeljs", 800, 800).fromage(400, 400, 200, data, labels, "#000");
+        };
+
         Raphael.fn.fromage = function (cx, cy, r, values, labels, stroke) {
             var paper = this;
             var rad = Math.PI / 180;
