@@ -468,9 +468,9 @@
                     return;
                 }
 
-                if (amount > 0 && amount < 10000) {
+                if (amount >= 0 && amount < 10000) {
                     formatedDatas[0] += 1;
-                } else if (amount > 10000 && amount < 50000) {
+                } else if (amount >= 10000 && amount <= 50000) {
                     formatedDatas[1] += 1;
                 } else {
                     formatedDatas[2] += 1;
