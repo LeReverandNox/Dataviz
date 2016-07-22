@@ -1,5 +1,5 @@
 /*jslint browser:true this for*/
-/*global window console angular AmCharts d3 $*/
+/*global window console angular AmCharts d3 $ Raphael*/
 
 (function () {
     "use strict";
@@ -440,8 +440,9 @@
         };
     });
 
-    controllers.controller("RaphaelJSCtrl", function () {
+    controllers.controller("RaphaelJSCtrl", function (DataService) {
+        var self = this;
         this.title = "RaphaelJS";
-        console.log("RaphaelJSCtrl");
+
     });
 }());
