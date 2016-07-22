@@ -59,7 +59,27 @@
                         controllerAs: "RCtrl"
                     }
                 }
-            });
+            })
+            .state("home.googlemap", {
+                url: "/googlemap",
+                views: {
+                    googlemap: {
+                        templateUrl: "partials/googlemap.html",
+                        controller: "GoogleMapCtrl",
+                        controllerAs: "GMCtrl"
+                    }
+                }
+            })
+            .state("home.heatmap", {
+                url: "/heatmap",
+                views: {
+                    heatmap: {
+                        templateUrl: "partials/heatmap.html",
+                        controller: "HeatMapCtrl",
+                        controllerAs: "HMCtrl"
+                    }
+                }
+            })
         $urlRouterProvider.otherwise("/home/amcharts");
     });
 }());
