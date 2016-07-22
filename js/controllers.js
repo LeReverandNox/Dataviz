@@ -543,6 +543,46 @@
     controllers.controller("GoogleMapCtrl", function (DataService) {
         var self = this;
         this.title = "Google Map";
+        this.extractCities = function (data) {
+            var formatedDatas = [];
+            data.forEach(function (record) {
+                var coord = record.fields.wgs84;
+                var amount = record.fields.montant_vote;
+                var city = record.fields.adresse_administrative_ville_du_tiers_beneficiaire;
+
+                if (coord === undefined) {
+                    return;
+                }
+                var existing = self.isCoordInArray(formatedDatas, coord);
+                if (!existing) {
+                    formatedDatas.push({
+                        lat: coord[0],
+                        long: coord[1],
+                        count: 1,
+                        amount : amount,
+                        name: city
+                    });
+                } else {
+                    existing.count += 1;
+                    existing.amount += amount;
+                }
+            });
+            return formatedDatas;
+        };
+
+        this.isCoordInArray = function (array, coord) {
+            var arr = array.filter(function (coords) {
+                return ((coords.lat === coord[0]) && (coords.long === coord[1]));
+
+            });
+
+            if (arr.length > 0) {
+                return arr[0];
+            } else {
+                return false;
+            }
+        };
+
     });
 
     controllers.controller("HeatMapCtrl", function (DataService) {
