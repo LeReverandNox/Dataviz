@@ -539,4 +539,14 @@
             return chart;
         };
     });
+
+    controllers.controller("GoogleMapCtrl", function (DataService) {
+        var self = this;
+        this.title = "Google Map";
+    });
+
+    controllers.controller("HeatMapCtrl", function (DataService) {
+        var self = this;
+        this.title = "Heat Map";
+    });
 }());
