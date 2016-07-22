@@ -464,5 +464,60 @@
             return formatedDatas;
         };
 
+        Raphael.fn.fromage = function (cx, cy, r, values, labels, stroke) {
+            var paper = this;
+            var rad = Math.PI / 180;
+            var chart = this.set();
+            var angle = 0;
+            var total = 0;
+            var start = 0;
+
+            function createSector(cx, cy, r, startAngle, endAngle, params) {
+                var x1 = cx + r * Math.cos(-startAngle * rad);
+                var x2 = cx + r * Math.cos(-endAngle * rad);
+                var y1 = cy + r * Math.sin(-startAngle * rad);
+                var y2 = cy + r * Math.sin(-endAngle * rad);
+                return paper.path(["M", cx, cy, "L", x1, y1, "A", r, r, 0, +(endAngle - startAngle > 180), 0, x2, y2, "z"]).attr(params);
+            }
+            function process(j) {
+                var value = values[j];
+                var angleplus = 360 * value / total;
+                var popangle = angle + (angleplus / 2);
+                var color = "hsb(" + start + ", 1, .5)";
+                var ms = 500;
+                var delta = 30;
+                var bcolor = "hsb(" + start + ", 1, 1)";
+                var p = createSector(cx, cy, r, angle, angle + angleplus, {gradient: "90-" + bcolor + "-" + color, stroke: stroke, "stroke-width": 3});
+                var txt = paper.text(cx + (r + delta + 55) * Math.cos(-popangle * rad), cy + (r + delta + 25) * Math.sin(-popangle * rad), labels[j]).attr({fill: bcolor, stroke: "none", opacity: 0, "font-family": 'Fontin-Sans, Arial', "font-size": "20px"});
+                var txt2 = paper.text(cx + (r + delta + 55) * Math.cos(-popangle * rad), cy + (r + delta + 100) * Math.sin(-popangle * rad), Math.floor((values[j] * 100) / total) + "%").attr({fill: bcolor, stroke: "none", opacity: 0, "font-family": 'Fontin-Sans, Arial', "font-size": "20px"});
+
+                p.mouseover(function () {
+                    p.animate({scale: [1.1, 1.1, cx, cy]}, ms, "elastic");
+                    txt.animate({opacity: 1}, ms, "elastic");
+                    txt2.animate({opacity: 1}, ms, "elastic");
+                });
+                p.mouseout(function () {
+                    p.animate({scale: [1, 1, cx, cy]}, ms, "elastic");
+                    txt.animate({opacity: 0}, ms);
+                    txt2.animate({opacity: 0}, ms);
+                });
+
+                angle += angleplus;
+                chart.push(p);
+                chart.push(txt);
+                chart.push(txt2);
+                start += 0.1;
+            }
+
+            var i;
+            var ii = values.length;
+            for (i = 0; i < ii; i += 1) {
+                total += values[i];
+            }
+            for (i = 0; i < ii; i += 1) {
+                process(i);
+            }
+            return chart;
+        };
     });
 }());
