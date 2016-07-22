@@ -583,6 +583,33 @@
             }
         };
 
+        this.generateMap = function (data) {
+            var startPoint = {lat: data[0].lat, lng: data[0].long};
+            var markers = [];
+            var map = new google.maps.Map(document.getElementById('googlemap'), {
+                zoom: 4,
+                center: startPoint
+            });
+
+            data.forEach(function (coords) {
+                var marker = new google.maps.Marker({
+                    position: {
+                        lat: coords.lat,
+                        lng: coords.long
+                    },
+                    map: map,
+                    title: coords.name,
+                    label: coords.count.toString()
+                });
+                markers.push(marker);
+            });
+
+            var options = {
+                imagePath: 'bower_components/js-marker-clusterer/images/m'
+            };
+
+            var markerCluster = new MarkerClusterer(map, markers, options);
+        };
     });
 
     controllers.controller("HeatMapCtrl", function (DataService) {
