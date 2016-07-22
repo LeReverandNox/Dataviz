@@ -444,6 +444,21 @@
         var self = this;
         this.title = "RaphaelJS";
 
+        DataService.getData(function (data) {
+            data = self.proceedData(data);
+            var labels = [
+                "Moins de 10K€",
+                "Entre 10K€ et 50K€",
+                "Plus de 50K €"
+            ];
+            self.generateChart(data, labels);
+        });
+
+        this.proceedData = function (data) {
+            data = this.groupByAmount(data);
+            return data;
+        };
+
         this.groupByAmount = function (data) {
             var formatedDatas = [0, 0, 0];
             var amount;
