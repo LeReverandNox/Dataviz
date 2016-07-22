@@ -543,6 +543,17 @@
     controllers.controller("GoogleMapCtrl", function (DataService) {
         var self = this;
         this.title = "Google Map";
+
+        DataService.getData(function (data) {
+            var formatedDatas = self.proceedData(data);
+            // self.generateChart(formatedDatas);
+        });
+
+        this.proceedData = function (data) {
+            var formatedDatas = this.extractCities(data);
+            this.generateMap(formatedDatas);
+        };
+
         this.extractCities = function (data) {
             var formatedDatas = [];
             data.forEach(function (record) {
