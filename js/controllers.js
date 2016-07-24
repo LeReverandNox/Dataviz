@@ -225,7 +225,7 @@
                     }
                 },
                 tooltip: {
-                    pointFormat: "{series.name} got <b>{point.y:,.0f}</b><br/>aides in {point.x}"
+                    pointFormat: "{series.name} got <b>{point.y}</b><br/>aides in {point.x}"
                 },
                 plotOptions: {
                     area: {
