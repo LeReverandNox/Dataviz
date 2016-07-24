@@ -640,5 +640,18 @@
             return formatedDatas;
         };
 
+        this.generateMap = function (data) {
+            var startPoint = data[0];
+
+            var map = new google.maps.Map(document.getElementById('heatmap'), {
+                zoom: 4,
+                center: startPoint
+            });
+
+            var heatmap = new google.maps.visualization.HeatmapLayer({
+                data: data,
+                map: map
+            });
+        };
     });
 }());
