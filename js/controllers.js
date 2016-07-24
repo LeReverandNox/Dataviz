@@ -626,5 +626,19 @@
     controllers.controller("HeatMapCtrl", function (DataService) {
         var self = this;
         this.title = "Heat Map";
+        this.extractCoords = function (data) {
+            var formatedDatas = [];
+
+            data.forEach(function (record) {
+                var coords = record.fields.wgs84;
+                if (coords === undefined) {
+                    return;
+                }
+                formatedDatas.push(new google.maps.LatLng(coords[0], coords[1]));
+            });
+
+            return formatedDatas;
+        };
+
     });
 }());
