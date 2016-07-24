@@ -1,5 +1,5 @@
 /*jslint browser:true this for*/
-/*global window console angular AmCharts d3 $ Raphael*/
+/*global window console angular AmCharts d3 $ Raphael google */
 
 (function () {
     "use strict";
