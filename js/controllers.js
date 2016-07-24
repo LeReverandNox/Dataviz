@@ -626,6 +626,17 @@
     controllers.controller("HeatMapCtrl", function (DataService) {
         var self = this;
         this.title = "Heat Map";
+
+        DataService.getData(function (data) {
+            var formatedDatas = self.proceedData(data);
+            self.generateMap(formatedDatas);
+        });
+
+        this.proceedData = function (data) {
+            data = this.extractCoords(data);
+            return data;
+        };
+
         this.extractCoords = function (data) {
             var formatedDatas = [];
 
