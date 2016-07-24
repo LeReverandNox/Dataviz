@@ -509,8 +509,8 @@
                 var delta = 30;
                 var bcolor = "hsb(" + start + ", 1, 1)";
                 var p = createSector(cx, cy, r, angle, angle + angleplus, {gradient: "90-" + bcolor + "-" + color, stroke: stroke, "stroke-width": 3});
-                var txt = paper.text(cx + (r + delta + 55) * Math.cos(-popangle * rad), cy + (r + delta + 25) * Math.sin(-popangle * rad), labels[j]).attr({fill: bcolor, stroke: "none", opacity: 0, "font-family": 'Fontin-Sans, Arial', "font-size": "20px"});
-                var txt2 = paper.text(cx + (r + delta + 55) * Math.cos(-popangle * rad), cy + (r + delta + 100) * Math.sin(-popangle * rad), Math.floor((values[j] * 100) / total) + "%").attr({fill: bcolor, stroke: "none", opacity: 0, "font-family": 'Fontin-Sans, Arial', "font-size": "20px"});
+                var txt = paper.text(cx + (r + delta + 55) * Math.cos(-popangle * rad), cy + (r + delta + 25) * Math.sin(-popangle * rad), labels[j]).attr({fill: bcolor, stroke: "none", opacity: 0, "font-family": "Fontin-Sans, Arial", "font-size": "20px"});
+                var txt2 = paper.text(cx + (r + delta + 55) * Math.cos(-popangle * rad), cy + (r + delta + 100) * Math.sin(-popangle * rad), Math.floor((values[j] * 100) / total) + "%").attr({fill: bcolor, stroke: "none", opacity: 0, "font-family": "Fontin-Sans, Arial", "font-size": "20px"});
 
                 p.mouseover(function () {
                     p.animate({scale: [1.1, 1.1, cx, cy]}, ms, "elastic");
@@ -599,7 +599,7 @@
         this.generateMap = function (data) {
             var startPoint = {lat: data[0].lat, lng: data[0].long};
             var markers = [];
-            var map = new google.maps.Map(document.getElementById('googlemap'), {
+            var map = new google.maps.Map(document.getElementById("googlemap"), {
                 zoom: 4,
                 center: startPoint
             });
@@ -618,7 +618,7 @@
             });
 
             var options = {
-                imagePath: 'bower_components/js-marker-clusterer/images/m'
+                imagePath: "bower_components/js-marker-clusterer/images/m"
             };
 
             var markerCluster = new MarkerClusterer(map, markers, options);
@@ -657,7 +657,7 @@
         this.generateMap = function (data) {
             var startPoint = data[0];
 
-            var map = new google.maps.Map(document.getElementById('heatmap'), {
+            var map = new google.maps.Map(document.getElementById("heatmap"), {
                 zoom: 4,
                 center: startPoint
             });
