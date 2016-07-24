@@ -110,10 +110,11 @@
                 var aides = [];
                 var i;
                 var block;
+                var getCurrYear = function (aide) {
+                    return parseInt(aide.year) === i;
+                };
                 for (i = parseInt(minYear); i <= parseInt(maxYear); i += 1) {
-                    block = data.aides.filter(function (aide) {
-                        return parseInt(aide.year) === i;
-                    });
+                    block = data.aides.filter(getCurrYear);
                     if (block.length > 0) {
                         aides.push(block[0].count);
                     } else {
@@ -480,7 +481,8 @@
         };
 
         this.generateChart = function (data, labels) {
-            Raphael("raphaeljs", 800, 800).fromage(400, 400, 200, data, labels, "#000");
+            var graph = new Raphael("raphaeljs", 800, 800).fromage(400, 400, 200, data, labels, "#000");
+            return graph;
         };
 
         Raphael.fn.fromage = function (cx, cy, r, values, labels, stroke) {
@@ -546,12 +548,12 @@
 
         DataService.getData(function (data) {
             var formatedDatas = self.proceedData(data);
-            // self.generateChart(formatedDatas);
+            self.generateChart(formatedDatas);
         });
 
         this.proceedData = function (data) {
             var formatedDatas = this.extractCities(data);
-            this.generateMap(formatedDatas);
+            return formatedDatas;
         };
 
         this.extractCities = function (data) {
@@ -570,7 +572,7 @@
                         lat: coord[0],
                         long: coord[1],
                         count: 1,
-                        amount : amount,
+                        amount: amount,
                         name: city
                     });
                 } else {
@@ -620,6 +622,7 @@
             };
 
             var markerCluster = new MarkerClusterer(map, markers, options);
+            return markerCluster;
         };
     });
 
@@ -663,6 +666,8 @@
                 data: data,
                 map: map
             });
+
+            return heatmap;
         };
     });
 }());
