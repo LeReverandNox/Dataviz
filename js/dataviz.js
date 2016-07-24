@@ -79,7 +79,7 @@
                         controllerAs: "HMCtrl"
                     }
                 }
-            })
+            });
         $urlRouterProvider.otherwise("/home/amcharts");
     });
 }());
