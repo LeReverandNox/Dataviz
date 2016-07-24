@@ -548,7 +548,7 @@
 
         DataService.getData(function (data) {
             var formatedDatas = self.proceedData(data);
-            self.generateChart(formatedDatas);
+            self.generateMap(formatedDatas);
         });
 
         this.proceedData = function (data) {
