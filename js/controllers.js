@@ -1,5 +1,5 @@
 /*jslint browser:true this for*/
-/*global window console angular AmCharts d3 $ Raphael google */
+/*global window console angular AmCharts d3 $ Raphael google MarkerClusterer */
 
 (function () {
     "use strict";
